@@ -1,8 +1,10 @@
 <?php
 
+use Carbon\Carbon;
+
 use function Livewire\Volt\{state};
 
-$now = \Carbon\Carbon::now();
+$now = Carbon::now();
 $timezoneOffset = $now->offsetHours >= 0 ? '+' . $now->offsetHours : $now->offsetHours;
 
 state([

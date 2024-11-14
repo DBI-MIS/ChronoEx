@@ -17,10 +17,21 @@ class User extends Authenticatable
     const ROLE_USER = 'USER';
     const ROLE_DEFAULT = self::ROLE_USER;
 
+    const STATUS_ACTIVE = 'ACTIVE';
+    const STATUS_INACTIVE = 'INACTIVE';
+    const STATUS_RESIGNED = 'RESIGNED';
+    const STATUS_DEFAULT = self::STATUS_ACTIVE;
+
     const ROLES = [
         self::ROLE_ADMIN => 'Admin',
         self::ROLE_EDITOR => 'Editor',
         self::ROLE_USER => 'User',
+    ];
+
+    const STATUS = [
+        self::STATUS_ACTIVE => 'Active',
+        self::STATUS_INACTIVE => 'Inactive',
+        self::STATUS_RESIGNED => 'Resigned',
     ];
 
 
@@ -44,8 +55,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'team',
+        'team_id',
         'role',
+        'status',
     ];
 
     /**
@@ -68,6 +80,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'team_id' => 'array',
         ];
     }
 
@@ -79,6 +92,11 @@ class User extends Authenticatable
     public function announcements()
     {
         return $this->hasMany(Announcement::class);
+    }
+
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class, 'user_teams')->withPivot(['order'])->withTimestamps();
     }
 
 }

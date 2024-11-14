@@ -16,10 +16,13 @@ class Attendance extends Model
         'time_out',
         'is_timed_in',
         'is_timed_out',
+        'early_login',
+        'late_login',
     ];
 
     protected $casts = [
-    
+        'early_login' => 'bolean',
+        'late_login' => 'bolean',
 
     ];
 
@@ -48,6 +51,11 @@ class Attendance extends Model
     {
         return $value ? Carbon::parse($value)->format('h:i A') : null;
     }
+
+//     public function scopeToday($query)
+// {
+//     return $query->whereDate('time_in', Carbon::today());
+// }
 
 
 }

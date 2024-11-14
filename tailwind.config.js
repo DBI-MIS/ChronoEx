@@ -17,5 +17,23 @@ export default {
         },
     },
 
-    plugins: [forms],
+
+    plugins: [forms, require('daisyui'),],
+    darkMode: 'class',
+    // variants: { extend: { display: ['dark'], } },
+
+    daisyui: {
+        themes: [
+            "light",
+            "dark",
+            "cupcake",
+            "sunset",
+        ],
+        darkTheme: "sunset",
+        lightTheme: "cupcake",
+        // base: true, 
+        // styled: true, 
+        // utils: true, 
+        // themeRoot: ":root",
+    },
 };

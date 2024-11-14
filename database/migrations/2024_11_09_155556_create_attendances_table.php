@@ -19,6 +19,8 @@ return new class extends Migration
             $table->time('time_out')->nullable();
             $table->string('is_timed_in')->default('pending');
             $table->string('is_timed_out')->default('pending');
+            $table->boolean('early_login')->default(false);
+            $table->boolean('late_login')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

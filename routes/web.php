@@ -12,4 +12,6 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
+Route::post('/api/save-location', [LocationController::class, 'store']);
+
 require __DIR__.'/auth.php';
