@@ -67,20 +67,20 @@ $ensureAttendanceIsMine = protect(function () {
 <div class="flex flex-row gap-2 py-4">
     @csrf
     <!-- Time In Form -->
-    <form wire:submit.prevent="timeIn">
+    <x-ex-form wire:submit.prevent="timeIn">
         <input type="date" wire:model="time_in" hidden>
 
-        <button type="submit" class="bg-green-600 w-36 px-2 py-2 rounded-md hover:bg-green-800">
+        <x-ex-button type="submit" class="w-36 px-2 py-2">
             IN
-        </button>
-    </form>
+        </x-ex-button>
+    </x-ex-form>
 
     <!-- Time Out Form -->
-    <form wire:submit.prevent="timeOut">
+    <x-ex-form wire:submit.prevent="timeOut">
         <input type="date" wire:model="time_out" hidden>
 
-        <button type="submit" class="bg-red-600 w-36 px-2 py-2 rounded-md hover:bg-red-800">
+        <x-ex-button type="submit" class="w-36 px-2 py-2">
             OUT
-        </button>
-    </form>
+        </x-ex-button>
+    </x-ex-form>
 </div>

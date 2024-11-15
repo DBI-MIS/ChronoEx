@@ -36,9 +36,17 @@ $saveTimeSheet = function () {
     session()->flash('message', 'Timesheet saved successfully!');
 };
 
+// Function to toggle rest day
 $setRestDay = function ($index) {
-    $this->timesheetData[$index]['start_time'] = null;
-    $this->timesheetData[$index]['end_time'] = null;
+    if ($this->timesheetData[$index]['start_time'] === null && $this->timesheetData[$index]['end_time'] === null) {
+        // Re-enable the input fields by setting to default time values (optional)
+        $this->timesheetData[$index]['start_time'] = '09:00';
+        $this->timesheetData[$index]['end_time'] = '17:00';
+    } else {
+        // Set to null for rest day and disable the inputs
+        $this->timesheetData[$index]['start_time'] = null;
+        $this->timesheetData[$index]['end_time'] = null;
+    }
 };
 
 ?>
@@ -72,11 +80,16 @@ $setRestDay = function ($index) {
                     @foreach ($weekDays as $index => $day)
                         <td class="border px-4 py-2">
                             <label>Start Time:</label>
-                            <input type="time" wire:model="timesheetData.{{ $index }}.start_time" class="input">
+                            <input type="time" wire:model="timesheetData.{{ $index }}.start_time" class="input"
+                                   @if(is_null($timesheetData[$index]['start_time']) && is_null($timesheetData[$index]['end_time'])) disabled @endif>
                             <label>End Time:</label>
-                            <input type="time" wire:model="timesheetData.{{ $index }}.end_time" class="input">
+                            <input type="time" wire:model="timesheetData.{{ $index }}.end_time" class="input"
+                                   @if(is_null($timesheetData[$index]['start_time']) && is_null($timesheetData[$index]['end_time'])) disabled @endif>
                             <button type="button" wire:click="setRestDay({{ $index }})" class="btn btn-secondary mt-2">
-                                Off
+                                <span class="text-xs">
+                                {{ is_null($timesheetData[$index]['start_time']) && is_null($timesheetData[$index]['end_time']) ? 'Set Default' : 'Off' }}
+                                </span>
+                                
                             </button>
                         </td>
                     @endforeach
