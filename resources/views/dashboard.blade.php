@@ -49,7 +49,7 @@
         </div>
     </div>
 
-    <div class="py-4">
+    {{-- <div class="py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class=" shadow-sm sm:rounded-lg">
             <div class="flex items-start justify-center min-h-screen py-6">
@@ -57,7 +57,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 
     

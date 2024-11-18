@@ -20,13 +20,13 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
          <!-- Flatpickr  -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" defer>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr" defer></script>
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 		
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		{{-- <meta name="apple-mobile-web-app-status-bar-style" content="black">
                 <meta name="apple-mobile-web-app-capable" content="yes">
                 <meta name="mobile-web-app-capable" content="yes">
                 <link rel="manifest" href="/manifest.json">
@@ -61,15 +61,12 @@
                 <link href="/pwa/icons/ios/1024.png" sizes="1024x1024" rel="apple-touch-startup-image">
                 <link href="/pwa/icons/ios/512.png" sizes="512x512" rel="apple-touch-startup-image">
                 <link href="/pwa/icons/ios/256.png" sizes="256x256" rel="apple-touch-startup-image">
-                <link href="/pwa/icons/ios/192.png" sizes="192x192" rel="apple-touch-startup-image">
+                <link href="/pwa/icons/ios/192.png" sizes="192x192" rel="apple-touch-startup-image"> --}}
 
-                @livewireStyles
+                {{-- @livewireStyles --}}
     </head>
     <body class="font-sans antialiased">
-    
-	
-	
-        <div class="min-h-screen">
+        
             <livewire:layout.navigation />
 
             <!-- Page Heading -->
@@ -82,12 +79,12 @@
             @endif
 
             <!-- Page Content -->
-            <main class="h-screen w-full relative">
+            <main class="w-full relative">
                 {{ $slot }}
             </main>
-        </div>
+       
 
-        @livewireScripts
-    @livewireResourceTimeGridScripts
+        {{-- @livewireScripts --}}
+    {{-- @livewireResourceTimeGridScripts --}}
     </body>
 </html>
