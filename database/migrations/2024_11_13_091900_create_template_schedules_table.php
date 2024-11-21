@@ -15,7 +15,8 @@ return new class extends Migration
         Schema::create('template_schedules', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->nullable()->constrained()->onDelete('cascade');
-            $table->integer('day_of_week')->nullable();
+            $table->unsignedTinyInteger('day_of_week')->nullable();
+            $table->unsignedTinyInteger('week')->default(1);
             $table->time('start_time')->nullable();
             $table->time('end_time')->nullable();  
             $table->timestamps();

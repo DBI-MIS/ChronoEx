@@ -20,18 +20,49 @@ class TemplateScheduleResource extends Resource
 {
     protected static ?string $model = TemplateSchedule::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-calendar';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'name'),
-                Forms\Components\TextInput::make('day_of_week')
-                    ->numeric(),
-                DateTimePicker::make('start_time'),
-                DateTimePicker::make('end_time'),
+                    ->label('User')
+                    ->relationship('user', 'name')
+                    ->searchable()
+                    ->required(),
+
+                Forms\Components\Select::make('day_of_week')
+                    ->label('Day of Week')
+                    ->options([
+                        1 => 'Monday',
+                        2 => 'Tuesday',
+                        3 => 'Wednesday',
+                        4 => 'Thursday',
+                        5 => 'Friday',
+                        6 => 'Saturday',
+                        7 => 'Sunday',
+                    ])
+                    ->required(),
+
+                Forms\Components\Select::make('week')
+                    ->label('Week')
+                    ->options([
+                        1 => 'Week 1',
+                        2 => 'Week 2',
+                    ])
+                    ->default(1)
+                    ->required(),
+
+                Forms\Components\TimePicker::make('start_time')
+                    ->label('Start Time')
+                    ->required(),
+
+                Forms\Components\TimePicker::make('end_time')
+                    ->label('End Time')
+                    ->required()
+                    ->after('start_time'),
+
             ]);
     }
 
@@ -40,16 +71,33 @@ class TemplateScheduleResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('user.name')
-                    ->numeric()
-                    ->sortable(),
+                ->label('User')
+                ->sortable()
+                ->searchable(),
                 TextColumn::make('day_of_week')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('start_time'),
-                TextColumn::make('end_time'),
+                ->label('Day of Week')
+                ->formatStateUsing(fn ($state) => match ($state) {
+                    1 => 'Monday',
+                    2 => 'Tuesday',
+                    3 => 'Wednesday',
+                    4 => 'Thursday',
+                    5 => 'Friday',
+                    6 => 'Saturday',
+                    7 => 'Sunday',
+                    default => 'Unknown',
+                }),
+                TextColumn::make('week')
+                ->label('Week')
+                ->formatStateUsing(fn ($state) => $state === 1 ? 'Week 1' : 'Week 2'),
+                TextColumn::make('start_time')
+                ->label('Start Time')
+                ->time(),
+                TextColumn::make('end_time')
+                ->label('End Time')
+                ->time(),
                 TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
+                ->label('Created At')
+                ->dateTime()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
                     ->dateTime()

@@ -22,7 +22,6 @@
     @endguest
     @auth
     <div class="flex items-start justify-center min-h-screen py-6">
-        {{-- <livewire:weeklytimesheet /> --}}
     </div>
     @endauth
 
