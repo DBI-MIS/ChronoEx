@@ -7,7 +7,7 @@
 
     <div class="pt-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class=" shadow-sm sm:rounded-lg">
+            <div class=" shadow-xs sm:rounded-lg">
                 <div class="p-6">
                     
                     <livewire:schedule />
@@ -18,7 +18,7 @@
 
     <div class="pt-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class=" shadow-sm sm:rounded-lg">
+            <div class=" shadow-xs sm:rounded-lg">
                 <div class="p-6">
                     
                     <livewire:timer />
@@ -29,7 +29,7 @@
 
     <div class="pt-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class=" shadow-sm sm:rounded-lg">
+            <div class=" shadow-xs sm:rounded-lg">
                 <div class="p-6">
                     
                     <livewire:announcements />
@@ -40,7 +40,7 @@
 
     <div class="py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class=" shadow-sm sm:rounded-lg">
+            <div class=" shadow-xs sm:rounded-lg">
                 <div class="p-6">
                    
                     <livewire:currenttimelogs />
@@ -51,7 +51,7 @@
 
     {{-- <div class="py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class=" shadow-sm sm:rounded-lg">
+            <div class=" shadow-xs sm:rounded-lg">
             <div class="flex items-start justify-center min-h-screen py-6">
                 <livewire:weeklytimesheet />
                 </div>

@@ -53,7 +53,7 @@ $addAnnouncement = function () {
         <div x-data="{ announce_modal: false }"
             class="relative flex px-2 py-2 max-w-[300px] min-w-[280px] rounded-md shadow-md">
             <div class="flex flex-row gap-2 w-full " @click="announce_modal = true">
-                <x-heroicon-m-megaphone class="size-6 flex-shrink-0" />
+                <x-heroicon-m-megaphone class="size-6 shrink-0" />
                 <div class="flex flex-col w-full">
                     <div class="w-full font-bold text-md">{{ $teamannouncement->title }}</div>
                     <div class="w-full text-xs">
@@ -80,7 +80,7 @@ $addAnnouncement = function () {
                         {{ $teamannouncement->content }}
                     </div>
                 </div>
-                <x-ex-button label="Close" @click="announce_modal = false" />
+                <button label="Close" @click="announce_modal = false" />
             </div>
 
 
