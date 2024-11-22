@@ -99,4 +99,12 @@ class User extends Authenticatable
         return $this->belongsToMany(Team::class, 'user_teams')->withPivot(['order'])->withTimestamps();
     }
 
+    public function templateSchedulesForCurrentWeek()
+{
+    $currentWeek = (new TemplateSchedule())->getCurrentWeek();
+
+    return $this->hasMany(TemplateSchedule::class)
+        ->where('week', $currentWeek);
+}
+
 }

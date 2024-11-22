@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Attendance extends Model
 {
-    Use SoftDeletes;
+    use SoftDeletes;
 
     protected $fillable = [
         'user_id',
@@ -18,6 +18,10 @@ class Attendance extends Model
         'is_timed_out',
         'early_login',
         'late_login',
+        'lunch_start',
+        'lunch_end',
+        'break_start',
+        'break_end',
     ];
 
     protected $casts = [
@@ -27,7 +31,7 @@ class Attendance extends Model
     ];
 
 
-    public function user() 
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
@@ -42,20 +46,48 @@ class Attendance extends Model
     //     return \Carbon\Carbon::parse($value)->format('h:i A');
     // }
 
-    public function getTimeInAttribute($value)
-{
-    return $value ? Carbon::parse($value)->format('h:i A') : null;
-}
-    
-    public function getTimeOutAttribute($value)
+    public function getLunchStartAttribute($value)
     {
         return $value ? Carbon::parse($value)->format('h:i A') : null;
     }
 
-//     public function scopeToday($query)
-// {
-//     return $query->whereDate('time_in', Carbon::today());
-// }
+    public function getLunchEndAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format('h:i A') : null;
+    }
 
+    public function getBreakStartAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format('h:i A') : null;
+    }
+
+    public function getBreakEndAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format('h:i A') : null;
+    }
+
+    //     public function scopeToday($query)
+    // {
+    //     return $query->whereDate('time_in', Carbon::today());
+    // }
+
+    public function calculateWorkHours()
+{
+    $timeIn = $this->time_in ? Carbon::parse($this->time_in) : null;
+    $timeOut = $this->time_out ? Carbon::parse($this->time_out) : null;
+    $lunchDuration = $this->lunch_start && $this->lunch_end
+        ? Carbon::parse($this->lunch_end)->diffInMinutes(Carbon::parse($this->lunch_start))
+        : 0;
+    $breakDuration = $this->break_start && $this->break_end
+        ? Carbon::parse($this->break_end)->diffInMinutes(Carbon::parse($this->break_start))
+        : 0;
+
+    if ($timeIn && $timeOut) {
+        $totalMinutes = $timeOut->diffInMinutes($timeIn) - ($lunchDuration + $breakDuration);
+        return round($totalMinutes / 60, 2); // Return in hours
+    }
+
+    return null; // Not enough data
+}
 
 }

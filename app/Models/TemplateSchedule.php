@@ -9,6 +9,7 @@ class TemplateSchedule extends Model
     protected $fillable = [
         'user_id',
         'day_of_week',
+        'week',
         'start_time',
         'end_time',
     ];

@@ -21,6 +21,10 @@ return new class extends Migration
             $table->string('is_timed_out')->default('pending');
             $table->boolean('early_login')->default(false);
             $table->boolean('late_login')->default(false);
+            $table->timestamp('lunch_start')->nullable();
+            $table->timestamp('lunch_end')->nullable();
+            $table->timestamp('break_start')->nullable();
+            $table->timestamp('break_end')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
